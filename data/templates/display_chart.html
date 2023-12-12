@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <!-- Include Plotly JavaScript from CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Include Plotly CSS for styling (optional) -->
+    <link rel="stylesheet" href="https://cdn.plot.ly/plotly-latest.min.css">
+    <!-- Include Plotly chart HTML -->
+    {{ chart_html|safe }}
+    <!-- JavaScript code to customize and enhance the chart (optional) -->
+    <script>
+        // Custom JavaScript code to enhance the chart (optional)
+        // For example, add annotations, tooltips, etc.
+
+        // Example: Add a custom annotation to the chart
+        var annotation = {
+            x: '2022-01-01',
+            y: 100,
+            xref: 'x',
+            yref: 'y',
+            text: 'Custom Annotation',
+            showarrow: true,
+            arrowhead: 4,
+            ax: 0,
+            ay: -40
+        };
+
+        // Add the annotation to the layout
+        Plotly.update('chart', {annotations: [annotation]});
+    </script>
+</head>
+<body>
+    <h1>Price Over Time</h1>
+    <!-- Optional: You can add additional information or instructions here -->
+</body>
+</html>

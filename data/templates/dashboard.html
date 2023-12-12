@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard</title>
+    <!-- Add any additional CSS styles or libraries for better styling -->
+</head>
+<body>
+    <h1>Sales Dashboard</h1>
+
+    <!-- Line Chart -->
+    <div>
+        <h2>Price Over Time</h2>
+        {{ line_chart_html|safe }}
+    </div>
+
+    <!-- Bar Chart -->
+    <div>
+        <h2>Total Sales by Product</h2>
+        {{ bar_chart_html|safe }}
+    </div>
+
+    <!-- Scatter Plot -->
+    <div>
+        <h2>Quantity vs. Price</h2>
+        {{ scatter_plot_html|safe }}
+    </div>
+
+    <!-- Pie Chart -->
+    <div>
+        <h2>Sales Distribution by Country</h2>
+        {{ pie_chart_html|safe }}
+    </div>
+
+    <!-- Bubble Chart -->
+    <div>
+        <h2>Transaction Volume by Product</h2>
+        {{ bubble_chart_html|safe }}
+    </div>
+
+    <!-- Add any additional HTML elements or styles as needed -->
+</body>
+</html>

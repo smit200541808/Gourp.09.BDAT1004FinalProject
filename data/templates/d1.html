@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard</title>
+    <!-- Load Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Sales Dashboard</h1>
+
+    <!-- Date range selector -->
+    <label for="start-date">Start Date:</label>
+    <input type="date" id="start-date" name="start-date" value="{{ min_date }}">
+
+    <label for="end-date">End Date:</label>
+    <input type="date" id="end-date" name="end-date" value="{{ max_date }}">
+
+    <!-- Chart container -->
+    <canvas id="sales-chart"></canvas>
+
+    <!-- JavaScript code for fetching data and creating the chart -->
+    <script>
+        function fetchDataAndDrawChart() {
+            var startDate = document.getElementById('start-date').value;
+            var endDate = document.getElementById('end-date').value;
+
+            // Fetch data from the server
+            fetch('/get_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'start_date=' + startDate + '&end_date=' + endDate,
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract labels and values from the data
+                var labels = data.map(entry => entry[0]);
+                var values = data.map(entry => entry[1]);
+
+                // Create a bar chart using Chart.js
+                var ctx = document.getElementById('sales-chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Sales Over Time',
+                            data: values,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { title: { display: true, text: 'Date' } },
+                            y: { title: { display: true, text: 'Total Sales' } }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Call the function initially to draw the chart
+        fetchDataAndDrawChart();
+    </script>
+</body>
+</html>

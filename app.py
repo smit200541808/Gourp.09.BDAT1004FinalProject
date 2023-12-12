@@ -154,14 +154,14 @@ def create_dash_app_layout(df):
 
 
 def run_dash_app(app):
-    app.run_server(debug=True)
+    app.run(debug=True)
 
-def main():
+if __name__ == '__main__':
     # MongoDB Connection
     db = connect_to_mongodb()
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
     # Date Range
-    min_date = datetime(2023, 12, 1)
+    min_date = datetime(2023, 12, 6)
     max_date = datetime.now()
 
     # Combined Data
@@ -169,7 +169,7 @@ def main():
 
     # Initialize the Dash app
     app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
+    server = app.server
     # Set layout
     app.layout = create_dash_app_layout(df)
 
@@ -203,6 +203,3 @@ def main():
 
     # Run the app
     run_dash_app(app)
-
-if __name__ == '__main__':
-    main()
